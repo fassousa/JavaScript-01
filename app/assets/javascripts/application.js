@@ -13,5 +13,11 @@ function addTodo() {
   }
   var todoLi = document.createElement('LI');
   todoLi.textContent = userInput;
+  todoLi.addEventListener('click', removeTodo);
   ulEl.appendChild(todoLi);
+}
+
+function removeTodo() {
+  var clickedLi = event.target;
+  clickedLi.parentNode.removeChild(clickedLi);
 }
