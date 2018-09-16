@@ -1,37 +1,31 @@
 //= require rails-ujs
 //= require_tree .
-var inputEl = document.querySelector('input');
-var buttonEl = document.querySelector('button');
-var ulEl = document.querySelector('ul');
-
-var todos = [];
-
-buttonEl.addEventListener('click', addTodo);
-
-function addTodo() {
-  var userInput = inputEl.value;
-  if (userInput.trim() == '') {
-    return
-  }
-  var newTodo = { id: _.uniqueId(), value: userInput };
-  todos.push(newTodo);
-  var todoLi = document.createElement('LI');
-  todoLi.textContent = userInput;
-  todoLi.addEventListener('click', removeTodo);
-  todoLi.dataset.id = newTodo.id;
-  ulEl.appendChild(todoLi);
-  console.log(todos);
-}
-
-function removeTodo() {
-  var clickedLi = event.target;
-  var itemId = clickedLi.dataset.id;
-  for (var i = todos.length - 1; i >= 0; i--) {
-    if (todos[i].id == itemId) {
-      todos.splice(i, 1);
-      break;
+new Vue({
+  el: '#app',
+  data: {
+    todos: [],
+    userInput: ''
+  },
+  methods: {
+    addTodo: function() {
+      if (this.userInput.trim() == '') {
+        return;
+      }
+      var newTodo = {
+        id: _.uniqueId(),
+        value: this.userInput
+      };
+      this.todos.push(newTodo);
+      console.log(this.todos);
+    },
+    removeTodo(todo) {
+      var id = todo.id;
+      for (var i = 0; i < this.todos.lenght; i++) {
+        if (this.todos[i].id == id) {
+          this.todos.splice(i, 1);
+          break;
+        }
+      }
     }
   }
-  clickedLi.parentNode.removeChild(clickedLi);
-  console.log(todos);
-}
+});
