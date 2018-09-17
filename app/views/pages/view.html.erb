@@ -1,12 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
-
-<div id="app">
-  <p>{{ name }}</p>
-  <p v-if="name == 'Max'">Name Updated!</p>
-  <button v-on:click="changeName">Change Name</button>
-</div>
-
 <script>
   new Vue({
     el: '#app',
@@ -19,5 +12,11 @@
       }
     }
   });
-
 </script>
+
+<div id="app">
+  <p>{{ name }}</p>
+  <p v-if="name == 'Max' ? false : true">Name Updated!</p>
+  <button v-on:click="changeName">Change Name</button>
+</div>
+
